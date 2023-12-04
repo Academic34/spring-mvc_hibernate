@@ -13,8 +13,8 @@ public class User {
 //    @Column(name = "name")
     private String name;
 
-//    @Column(name = "lastName")
-    private String lastName;
+//    @Column(name = "surname")
+    private String surname;
 
 //    @Column(name = "yearOfBirth")
     private int yearOfBirth;
@@ -22,17 +22,17 @@ public class User {
     public User() {
     }
 
-    public User(String name, String lastName, int yearOfBirth) {
+    public User(String name, String surname, int yearOfBirth) {
         this.name = name;
-        this.lastName = lastName;
+        this.surname = surname;
         this.yearOfBirth = yearOfBirth;
     }
 
 
-    public User(int id, String name, String lastName, int yearOfBirth) {
+    public User(int id, String name, String surname, int yearOfBirth) {
         this.id = id;
         this.name = name;
-        this.lastName = lastName;
+        this.surname = surname;
         this.yearOfBirth = yearOfBirth;
     }
 
@@ -52,12 +52,12 @@ public class User {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public int getYearOfBirth() {
@@ -73,12 +73,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && yearOfBirth == user.yearOfBirth && Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName);
+        return id == user.id && yearOfBirth == user.yearOfBirth && Objects.equals(name, user.name) && Objects.equals(surname, user.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastName, yearOfBirth);
+        return Objects.hash(id, name, surname, yearOfBirth);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", surname='" + surname + '\'' +
                 ", yearOfBirth=" + yearOfBirth +
                 '}';
     }

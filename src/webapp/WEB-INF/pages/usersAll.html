@@ -8,20 +8,20 @@
 <body>
 
 <div align="center">
-    <h2>User Manager</h2>
-    <h3><a href="/new">New Customer</a></h3>
+    <h2>User manager</h2>
+    <h3><a href="users/new">New user</a></h3>
     <table border="1" cellpadding="5">
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>lastName</th>
-            <th>Year</th>
+            <th>Surname</th>
+            <th>Year of birth</th>
             <th>Action</th>
         </tr>
         <tr th:each="User: ${listUsers}">
             <td th:text="${User.id}"/>
             <td th:text="${User.name}"/>
-            <td th:text="${User.lastName}"/>
+            <td th:text="${User.surname}"/>
             <td th:text="${User.yearOfBirth}"/>
             <td>
                 <a href="/edit?id=${user.id}">Edit</a>

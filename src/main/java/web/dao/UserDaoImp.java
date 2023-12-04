@@ -11,11 +11,15 @@ import java.util.List;
 public class UserDaoImp implements UserDao {
 
 
-    List<User> listUsers = Arrays.asList(
-            new User(1, "name1", "lastName1", 1980),
-            new User(2, "name2", "lastName2", 1990),
-            new User(3, "name3", "lastName3", 2000),
-            new User(4, "name4", "lastName4", 1996));
+    List<User> listUsers = new ArrayList<>();
+
+    {
+        listUsers.addAll(Arrays.asList(
+                new User(1, "name1", "lastName1", 1980),
+                new User(2, "name2", "lastName2", 1990),
+                new User(3, "name3", "lastName3", 2000),
+                new User(4, "name4", "lastName4", 1996)));
+    }
 
 
     @Override

@@ -3,8 +3,8 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import web.model.User;
 import web.service.UserService;
 
 @Controller
@@ -30,36 +30,22 @@ public class UsersController {
 //        return "users/show";
 //    }
 
-//    @GetMapping("/new")
-//    public String newUser(@ModelAttribute("user") User user){
-////        model.addAttribute("user", new User());
-//        return "users/new";
-//    }
+    @GetMapping("/new")
+    public String newUser(Model model){
+        model.addAttribute("user", new User());
+        return "new";
+    }
 
-//    @PostMapping()
-//    String createNewUser(@RequestParam("name") String name,
-//                         @RequestParam("lastName") String lastName,
-//                         @RequestParam("yearOfBirth") int yearOfBirth,
-//                         Model model) {
-//
-//        User user = new User(name, lastName, yearOfBirth);
-//        userService.addUser(user);
-//
-//        model.addAttribute("user", user);
-//
-//        return "redirect:/users";
-//    }
+    @PostMapping("/saveUser")
+    public String create(@ModelAttribute("user") User user) {
+        userService.addUser(user);
+        return "redirect:/users";
+    }
 
-//    @PostMapping()
-//    public String create(@ModelAttribute("user") User user) {
-//        userService.addUser(user);
-//        return "redirect:/users";
-//    }
-
-//    @GetMapping("/{id}/edit")
+//    @GetMapping("/edit")
 //    public String edit(Model model, @RequestParam("id") int id) {
 //        model.addAttribute("user", userService.show(id));
-//        return "users/edit";
+//        return "edit";
 //    }
 //
 //    @GetMapping("/{id}/update")
