@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table class = "table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+        <th scope="col">lastName</th>
+        <th scope="col">year</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="User: ${listUsers}">
+        <td th:text="${User.id}"/>
+        <td th:text="${User.name}"/>
+        <td th:text="${User.lastName}"/>
+        <td th:text="${User.yearOfBirth}"/>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
