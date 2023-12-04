@@ -1,7 +1,6 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import web.dao.UserDao;
 import web.model.User;
@@ -29,12 +28,17 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void changeUser(User user) {
-        userDao.changeUser(user);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 
     @Override
     public void removeUser(int id) {
         userDao.removeUser(id);
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return userDao.getUserById(id);
     }
 }

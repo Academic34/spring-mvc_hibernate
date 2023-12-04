@@ -33,12 +33,20 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void changeUser(User user) {
-
+    public void updateUser(User user) {
+        User oldUser = getUserById(user.getId());
+        oldUser.setName(user.getName());
+        oldUser.setSurname(user.getSurname());
+        oldUser.setYearOfBirth(user.getYearOfBirth());
     }
 
     @Override
     public void removeUser(int id) {
-        listUsers.remove(listUsers.stream().filter(user -> user.getId() == id).findFirst().get());
+        listUsers.remove(getUserById(id));
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return listUsers.stream().filter(user -> user.getId() == id).findFirst().get();
     }
 }

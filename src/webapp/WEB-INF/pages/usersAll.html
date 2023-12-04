@@ -24,9 +24,9 @@
             <td th:text="${User.surname}"/>
             <td th:text="${User.yearOfBirth}"/>
             <td>
-                <a href="/edit?id=${user.id}">Edit</a>
+                <a th:href="@{/users/edit?id={id}(id=${User.getId()})}">Edit</a>
 
-                <a href="/delete?id=${user.id}">Delete</a>
+                <a th:href="@{/users/delete?id={id}(id=${User.getId()})}">Delete</a>
             </td>
         </tr>
     </table>
