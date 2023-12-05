@@ -1,52 +1,73 @@
 package web.dao;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import web.model.User;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import java.util.List;
 
-@Component
+@Repository
 public class UserDaoImp implements UserDao {
 
-
-    List<User> listUsers = new ArrayList<>();
-
-    {
-        listUsers.addAll(Arrays.asList(
-                new User(1, "name1", "lastName1", 1980),
-                new User(2, "name2", "lastName2", 1990),
-                new User(3, "name3", "lastName3", 2000),
-                new User(4, "name4", "lastName4", 1996)));
-    }
-
+//    @PersistenceContext
+    @Autowired
+    private EntityManagerFactory emf;
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
-        return listUsers;
+        EntityManager entityManager = null;
+        try {
+            entityManager = emf.createEntityManager();
+            String hql = "from User";
+            Query query = entityManager.createQuery(hql, User.class);
+            return query.getResultList();
+        }
+        finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public void addUser(User user) {
-        listUsers.add(user);
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public void updateUser(User user) {
-        User oldUser = getUserById(user.getId());
-        oldUser.setName(user.getName());
-        oldUser.setSurname(user.getSurname());
-        oldUser.setYearOfBirth(user.getYearOfBirth());
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(user);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public void removeUser(int id) {
-        listUsers.remove(getUserById(id));
+        EntityManager entityManager = emf.createEntityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.remove(entityManager.find(User.class, id));
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public User getUserById(int id) {
-        return listUsers.stream().filter(user -> user.getId() == id).findFirst().get();
+        EntityManager entityManager = null;
+        try {
+            entityManager = emf.createEntityManager();
+            return entityManager.find(User.class, id);
+        }
+        finally {
+            entityManager.close();
+        }
     }
 }

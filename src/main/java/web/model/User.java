@@ -1,22 +1,23 @@
 package web.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-//@Entity
-//@Table(name = "Users")
+@Entity
+@Table(name = "Users")
 public class User {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @Column(name = "name")
+    @Column(name = "name")
     private String name;
 
-//    @Column(name = "surname")
+    @Column(name = "surname")
     private String surname;
 
-//    @Column(name = "yearOfBirth")
+    @Column(name = "yearOfBirth")
     private int yearOfBirth;
 
     public User() {
