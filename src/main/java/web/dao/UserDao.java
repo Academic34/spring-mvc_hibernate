@@ -6,10 +6,6 @@ import java.util.List;
 
 public interface UserDao {
 
-//    void createUserTable();
-
-//    void dropUserTable();
-
     List<User> getAllUsers();
 
     void addUser(User user);

@@ -1,6 +1,5 @@
 package web.config;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -35,27 +34,12 @@ public class AppConfig {
 
     @Bean
     public DataSource getDataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName(env.getProperty("db.driver"));
-//        dataSource.setUrl(env.getProperty("db.url"));
-//        dataSource.setUsername(env.getProperty("db.username"));
-//        dataSource.setPassword(env.getProperty("db.password"));
-
-        BasicDataSource ds = new BasicDataSource();
-        ds.setUrl(env.getRequiredProperty("db.url"));
-        ds.setDriverClassName(env.getRequiredProperty("db.driver"));
-        ds.setUsername(env.getRequiredProperty("db.username"));
-        ds.setPassword(env.getRequiredProperty("db.password"));
-
-//        ds.setInitialSize(Integer.valueOf(env.getRequiredProperty("db.initialSize")));
-//        ds.setMinIdle(Integer.valueOf(env.getRequiredProperty("db.minIdle")));
-//        ds.setMaxIdle(Integer.valueOf(env.getRequiredProperty("db.maxIdle")));
-//        ds.setTimeBetweenEvictionRunsMillis(Long.valueOf(env.getRequiredProperty("db.timeBetweenEvictionRunsMillis")));
-//        ds.setMinEvictableIdleTimeMillis(Long.valueOf(env.getRequiredProperty("db.testOnBorrow")));
-//        ds.setTestOnBorrow(Boolean.valueOf(env.getRequiredProperty("db.minEvictableIdleTimeMillis")));
-//        ds.setValidationQuery(env.getRequiredProperty("db.validationQuery"));
-
-        return ds;
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getProperty("db.driver"));
+        dataSource.setUrl(env.getProperty("db.url"));
+        dataSource.setUsername(env.getProperty("db.username"));
+        dataSource.setPassword(env.getProperty("db.password"));
+        return dataSource;
     }
 
     @Bean
@@ -82,15 +66,8 @@ public class AppConfig {
             properties.load(is);
             return properties;
         } catch (IOException e) {
-            throw new IllegalArgumentException("fdfsfds", e);
+            throw new IllegalArgumentException("Can't find 'hibernate.properties' in classpath", e);
         }
     }
-
-//    @Bean
-//    public HibernateTransactionManager getTransactionManager() {
-//        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-//        transactionManager.setSessionFactory(getSessionFactory().getObject());
-//        return transactionManager;
-//    }
 
 }
